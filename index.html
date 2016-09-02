@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>base 编解码 示例</title>
+</head>
+<body>
+	F12 调试 看 console.log()
+</body>
+<script src="src/base64.js"></script>
+<script type="text/javascript">
+	var name = "luozhiyi";
+	console.log("加密前:"+ name);
+	console.log("加密后:"+ BASE64.encode(name));
+	console.log("解密后:"+ BASE64.decode(BASE64.encode(name)));
+</script>
+</html>
