@@ -46,8 +46,8 @@
             c1 = str.charCodeAt(i++) & 0xff;
             if (i == len)
             {
-                out[j++] = EncodeChars[c1 >> 2];
-                out[j++] = EncodeChars[(c1 & 0x3) << 4];
+                out[j++] = BASE64.EncodeChars[c1 >> 2];
+                out[j++] = BASE64.EncodeChars[(c1 & 0x3) << 4];
                 out[j++] = "==";
                 break;
             }
