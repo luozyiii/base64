@@ -10,9 +10,9 @@
 
  (function (window,undefined) {
 
-     var BASE64 = {},
+     var BASE64 = {};
 
-     EncodeChars = [
+     BASE64.EncodeChars = [
         "A", "B", "C", "D", "E", "F", "G", "H",
         "I", "J", "K", "L", "M", "N", "O", "P",
         "Q", "R", "S", "T", "U", "V", "W", "X",
@@ -23,7 +23,7 @@
         "4", "5", "6", "7", "8", "9", "+", "/"
     ];
 
-    DecodeChars = [
+    BASE64.DecodeChars = [
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
@@ -54,17 +54,17 @@
             c2 = str.charCodeAt(i++) & 0xff;
             if (i == len)
             {
-                out[j++] = EncodeChars[c1 >> 2];
-                out[j++] = EncodeChars[((c1 & 0x03) << 4) | ((c2 & 0xf0) >> 4)];
-                out[j++] = EncodeChars[(c2 & 0x0f) << 2];
+                out[j++] = BASE64.EncodeChars[c1 >> 2];
+                out[j++] = BASE64.EncodeChars[((c1 & 0x03) << 4) | ((c2 & 0xf0) >> 4)];
+                out[j++] = BASE64.EncodeChars[(c2 & 0x0f) << 2];
                 out[j++] = "=";
                 break;
             }
             c3 = str.charCodeAt(i++) & 0xff;
-            out[j++] = EncodeChars[c1 >> 2];
-            out[j++] = EncodeChars[((c1 & 0x03) << 4) | ((c2 & 0xf0) >> 4)];
-            out[j++] = EncodeChars[((c2 & 0x0f) << 2) | ((c3 & 0xc0) >> 6)];
-            out[j++] = EncodeChars[c3 & 0x3f];
+            out[j++] = BASE64.EncodeChars[c1 >> 2];
+            out[j++] = BASE64.EncodeChars[((c1 & 0x03) << 4) | ((c2 & 0xf0) >> 4)];
+            out[j++] = BASE64.EncodeChars[((c2 & 0x0f) << 2) | ((c3 & 0xc0) >> 6)];
+            out[j++] = BASE64.EncodeChars[c3 & 0x3f];
         }
         return out.join('');
     }
@@ -80,13 +80,13 @@
         while (i < len) {
             /* c1 */
             do {
-                c1 = DecodeChars[str.charCodeAt(i++) & 0xff];
+                c1 = BASE64.DecodeChars[str.charCodeAt(i++) & 0xff];
             } while (i < len && c1 == -1);
             if (c1 == -1) break;
 
             /* c2 */
             do {
-                c2 = DecodeChars[str.charCodeAt(i++) & 0xff];
+                c2 = BASE64.DecodeChars[str.charCodeAt(i++) & 0xff];
             } while (i < len && c2 == -1);
             if (c2 == -1) break;
 
@@ -96,7 +96,7 @@
             do {
                 c3 = str.charCodeAt(i++) & 0xff;
                 if (c3 == 61) return out.join('');
-                c3 = DecodeChars[c3];
+                c3 = BASE64.DecodeChars[c3];
             } while (i < len && c3 == -1);
             if (c3 == -1) break;
             out[j++] = String.fromCharCode(((c2 & 0x0f) << 4) | ((c3 & 0x3c) >> 2));
@@ -105,7 +105,7 @@
             do {
                 c4 = str.charCodeAt(i++) & 0xff;
                 if (c4 == 61) return out.join('');
-                c4 = DecodeChars[c4];
+                c4 = BASE64.DecodeChars[c4];
             } while (i < len && c4 == -1);
             if (c4 == -1) break;
             out[j++] = String.fromCharCode(((c3 & 0x03) << 6) | c4);
