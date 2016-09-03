@@ -67,7 +67,7 @@
             out[j++] = BASE64.EncodeChars[c3 & 0x3f];
         }
         return out.join('');
-    }
+    };
 
     // 解密
     BASE64.decode = function (str) {
@@ -111,7 +111,7 @@
             out[j++] = String.fromCharCode(((c3 & 0x03) << 6) | c4);
         }
         return out.join('');
-    }
+    };
 
     window.BASE64 = BASE64;
 
